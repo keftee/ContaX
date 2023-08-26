@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:contact_manager/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'style.dart';
@@ -8,9 +10,10 @@ class EditContactPage extends StatelessWidget {
   final nameController = TextEditingController();
   final numberController = TextEditingController();
   final emailController = TextEditingController();
+  final user = FirebaseAuth.instance.currentUser!;
 
   Future addContact(String name, int num, String email) async {
-    await FirebaseFirestore.instance.collection('Contacts').add( {
+    await FirebaseFirestore.instance.collection(user.email!).add( {
       'Name' : name,
       'Number' : num,
       'Email' : email,
@@ -24,7 +27,7 @@ class EditContactPage extends StatelessWidget {
         backgroundColor: bgColor,
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: SafeArea(child: Padding(
+        title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -34,7 +37,7 @@ class EditContactPage extends StatelessWidget {
               Text("Add a New Contact", style: TextStyle(fontWeight: fontWeight,  color: textColor1),),
             ],
           ),
-        )),
+        ),
       ),
       body: Center(
         child: Column(
@@ -79,6 +82,7 @@ class EditContactPage extends StatelessWidget {
           backgroundColor: textColor1,
                 onPressed: () {
                   addContact((nameController.text).trim(), int.parse((numberController.text).trim()), (emailController.text).trim());
+                  Navigator.of(context).push(_createRoute());
                 },
                 label: Text("Save", style: TextStyle(fontWeight: fontWeight, color: bgColor),),
                 
@@ -88,4 +92,25 @@ class EditContactPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+}
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
+    transitionDuration: const Duration(milliseconds: 400),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(-1.0, 0.0);
+      const end = Offset.zero;
+      var curve = Curves.easeIn;
+      var curveTween = CurveTween(curve: curve);
+      final tween = Tween(begin: begin, end: end).chain(curveTween);
+      final offsetAnimation = animation.drive(tween);
+
+      
+
+      return SlideTransition(
+        position: offsetAnimation,
+        child: child,
+      );
+    },
+  );
 }

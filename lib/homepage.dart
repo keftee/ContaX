@@ -42,26 +42,24 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text('ContaX',
-                  style: TextStyle(fontWeight: fontWeight, color: textColor1, fontSize: 40),
-                ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text('ContaX',
+                style: TextStyle(fontWeight: fontWeight, color: textColor1, fontSize: 40),
               ),
+            ),
 
-              IconButton(
-                onPressed: signUserOut, 
-                icon: const Icon(Icons.logout_rounded),
-                color: textColor1,
-                tooltip: 'Logout',
-                iconSize: 20,
-              )
-            ],
-          ),
+            IconButton(
+              onPressed: signUserOut, 
+              icon: const Icon(Icons.logout_rounded),
+              color: textColor1,
+              tooltip: 'Logout',
+              iconSize: 20,
+            )
+          ],
         ),
         // actions: [
           
@@ -91,25 +89,18 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(7.0),
                       child: ElevatedButton(
                         onPressed: () {Navigator.of(context).push(_createRoute2(docIDs, index));},
-                        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),side: BorderSide(width: 1)),
-                        // hoverElevation: 10,
-                        // elevation: 5,
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.grey[100]),
-                          elevation: MaterialStatePropertyAll(0),
+                          elevation: const MaterialStatePropertyAll(0),
                           shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                         ),
                         child: Container(
                           height: 80,
-                          // decoration: BoxDecoration(
-                          //   borderRadius: BorderRadius.circular(10),
-                            // border: Border.all(color: Colors.grey.shade600), 
-                            // color: Colors.black
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ListTile(
-                                leading: Icon(Icons.person),
+                                leading: const Icon(Icons.person),
                                 title: GetUserName(documentID: docIDs[index], ts: TextStyle(fontWeight: fontWeight, color: textColor1, fontSize: 18),)
                               ),
                             ],

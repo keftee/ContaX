@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'get_user_mail.dart';
 import 'get_user_name.dart';
 import 'get_user_number.dart';
+import 'package:url_launcher/url_launcher.dart';
 class ContactPage extends StatelessWidget {
   final String docID;
   ContactPage ({required this.docID});
@@ -14,8 +15,9 @@ class ContactPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        backgroundColor: bgColor,
         automaticallyImplyLeading: false,
-        title: SafeArea(child: Padding(
+        title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -25,32 +27,47 @@ class ContactPage extends StatelessWidget {
               GetUserName(documentID: docID, ts: TextStyle(fontWeight: fontWeight, color: textColor1,),),//Text("Add a New Contact", style: TextStyle(fontWeight: fontWeight),),
             ],
           ),
-        )),
+        ),
       ),
 //GetUserName(documentID: docID, ts: TextStyle(fontWeight: fontWeight, color: textColor1, fontSize: 40),),
       body: Column(
           children: [
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  SizedBox(width: 10,),
-                  Icon(Icons.phone),
-                  SizedBox(width: 20,),
+                  const SizedBox(width: 10,),
+                  IconButton(
+                    onPressed: () async {
+                      Uri phoneno = Uri.parse('tel:$number');
+                      if(true) {
+                        //dialer opened
+                        await launchUrl(phoneno);
+                      }
+                    }, 
+                    icon: Icon(Icons.phone)
+                  ),
+                  
+                  const SizedBox(width: 20,),
                   //Text('Phone Number: ',style: TextStyle(fontSize: fontSize, color: textColor1),),
                   GetUserNumber(documentID: docID),
                 ],
               ),
             ),
-            Divider(thickness: 1,),
+            const Divider(thickness: 1,),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  SizedBox(width: 10,),
-                  Icon(Icons.email),
-                  SizedBox(width: 20,),
+                  const SizedBox(width: 10,),
+                  IconButton(
+                    onPressed: () async{
+                      Uri Email = Uri.parse('mailto:$email?subject=''&body=''');
+                      await launchUrl(Email);
+                    },
+                    icon:  const Icon(Icons.email),),
+                  const SizedBox(width: 20,),
                  // Text('Email: ', style: TextStyle(fontSize: fontSize, color: textColor1),),
                   GetUserMail(documentID: docID),
                 ],

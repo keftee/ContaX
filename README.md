@@ -1,16 +1,18 @@
-# contact_manager
+# ContaX
 
-A new Flutter project.
+This is a simple app that allow you to manage your contacts.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+1. Built on the Flutter framework (not a feature I know)
+2. Has Email-Password and Google Authentication.
+3. Allows you to register a new account in the app itself.
+4. Stores all the contact information in Firestore Database. This means that all your contacts are synced across your android devices.
+5. Redirects you to call and email directly from the app.
 
-A few resources to get you started if this is your first Flutter project:
+## Features to be added:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Adding profile picture costomisation.
+2. Adding SMS redirection.
+3. UI Improvements (I am not a UI designer I tried my best).
+4. Ability to render more than 60fps (I use a 120hz screen and I hate 60fps apps).

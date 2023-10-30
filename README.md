@@ -12,7 +12,7 @@ This is a simple app that allow you to manage your contacts.
 
 ## Features to be added:
 
-1. Adding profile picture costomisation.
+1. Adding profile picture customisation.
 2. Adding SMS redirection.
 3. UI Improvements (I am not a UI designer I tried my best).
 4. Ability to render more than 60fps (I use a 120hz screen and I hate 60fps apps).
